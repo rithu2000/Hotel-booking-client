@@ -11,7 +11,8 @@ export async function authenticate(email) {
 
 export async function registerUser(credentials) {
     try {
-        const { data } = await axios.post(`/api/register`, credentials, {withCredentials: true})
+        console.log(credentials, "sathanaM KAYYIL UND");
+        const { data } = await axios.post(`/api/register`, credentials, { withCredentials: true })
 
 
         return data
@@ -22,8 +23,9 @@ export async function registerUser(credentials) {
 
 export async function userLogin(credentials) {
     try {
+        console.log(credentials, "login satahnm indeda pota");
         const { data } = await axios.post(`/api/login`, credentials, { withCredentials: true })
-
+        console.log(data, "asdfghjkl");
         return data
     } catch (error) {
         return { error: 'login failed' }

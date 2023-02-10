@@ -5,6 +5,7 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import AdminLogin from './pages/admin/login/Login';
 import AdminHome from './pages/admin/dashboard/Dashboard';
+import { PaginationTable } from './pages/admin/userManagement/UserManagement'
 
 
 
@@ -15,8 +16,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/admin' element={<AdminLogin />} />
         <Route path='/home' element={<AdminHome />} />
-
-
+        <Route path='/viewusers' element={<PaginationTable />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Signup />} />
       </Routes>

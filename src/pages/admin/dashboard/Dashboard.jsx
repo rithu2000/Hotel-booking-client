@@ -1,5 +1,6 @@
 import React from 'react'
-import Navbar from '../navbar/Navbar'
+import Navbar from '../../../components/admin/navbar/Navbar';
+
 
 function Dashboard() {
   return (
@@ -7,4 +8,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Dashboard;
