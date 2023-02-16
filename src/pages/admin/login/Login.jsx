@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SideImage from '../../../assets/adminLogin.jpg'
 import { Toaster } from 'react-hot-toast'
-import { adminLogin } from '../../../helper/adminApi'
+import { adminLogin } from '../../../helper/AdminApi'
 import { useNavigate } from 'react-router-dom'
 import validator from 'validator'
 
@@ -31,7 +31,8 @@ function Login() {
 
         const response = await adminLogin(loginData)
         if (response.status) {
-            Navigate('/home')
+            localStorage.setItem("adminToken", response.token);
+            Navigate('/admin/')
         }
 
     }

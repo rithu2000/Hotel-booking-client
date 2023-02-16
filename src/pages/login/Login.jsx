@@ -29,9 +29,11 @@ function Login() {
         setSubmit(true)
 
         const response = await userLogin(loginData)
+         console.log(response.token);
         if (response.error) {
             toast.error(response.error)
         } else {
+            localStorage.setItem("token", response.token);
             toast.success(response.msg)
             Navigate('/')
         }
