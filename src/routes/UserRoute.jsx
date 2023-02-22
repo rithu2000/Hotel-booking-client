@@ -12,11 +12,8 @@ export default function UserRoute() {
                 <Route exact path='/' element={<Home />} />
                 <Route exact path='/login' element={<UserProtectRouter><Login /></UserProtectRouter>} />
                 <Route exact path='/register' element={<UserProtectRouter><Signup /></UserProtectRouter>} />
-
-                {/* <Route exact path='/hotelInfo' element={ <HotelInfo /> } />
-                <Route exact path='/viewHotel' element={ <ViewHotels /> } /> */}
+                
             </Routes>
         </>
-
     )
 }

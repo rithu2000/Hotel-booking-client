@@ -34,9 +34,8 @@ function Login() {
             localStorage.setItem("adminToken", response.token);
             Navigate('/admin/')
         }
-
+        
     }
-    // console.log(loginData, 'formdata');
 
 
     return (

@@ -7,13 +7,15 @@ import UserManage from "../pages/admin/userManagement/UserManagement";
 import AddHotel from "../pages/admin/addhotels/AddHotel";
 import ViewHotel from "../pages/admin/viewHotel/ViewHotel";
 import Navbar from "../components/admin/navbar/Navbar";
-import { useEffect, useState } from "react";
+import AddRoom from "../pages/admin/addRoom/AddRoom";
+import ViewRoom from "../pages/admin/viewRoom/ViewRoom";
+import EditRoom from "../pages/admin/editRoom/EditRoom";
+import EditHotel from "../pages/admin/editHotel/EditHotel";
 
 
-export default function Admin() {
+export default function AdminRoute() {
 
     return (
-
         <>
             <Routes>
                 <Route exact path="/admin-login" element={
@@ -45,11 +47,6 @@ export default function Admin() {
                         <ViewHotel />
                     </ProtectedRoute>
                 } />
-                {/* <Route exact path="/editHotel" element={
-                    <ProtectedRoute>
-                        <EditHotel />
-                    </ProtectedRoute>
-                } />
                 <Route exact path="/addRoom" element={
                     <ProtectedRoute>
                         <AddRoom />
@@ -64,7 +61,12 @@ export default function Admin() {
                     <ProtectedRoute>
                         <EditRoom />
                     </ProtectedRoute>
-                } /> */}
+                } />
+                 <Route exact path="/editHotel" element={
+                    <ProtectedRoute>
+                        <EditHotel />
+                    </ProtectedRoute>
+                } />
             </Routes>
         </>
     );

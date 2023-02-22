@@ -1,16 +1,14 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import log from '../../../assets/gallery6.jpeg'
+import log from '../../../assets/adminlogo.png'
 import { Link, useNavigate } from 'react-router-dom'
 
-
-
 const navigation = [
-    { name: 'Dashboard', href: '/admin'},
-    { name: 'View Hotel', href: '/admin/hotels' },
-    { name: 'Add Hotel', href: '/admin/addHotel'},
-    { name: 'User', href: '/admin/userlist'},
+    { name: 'Dashboard', href: '/admin' },
+    { name: 'User Management', href: '/admin/userlist' },
+    { name: 'Rooms', href: '/admin/Rooms' },
+    { name: 'Hotels', href: '/admin/hotels' },
 ]
 
 function classNames(...classes) {
@@ -62,7 +60,7 @@ export default function Navbar() {
                                                 key={item.name}
                                                 to={item.href}
                                                 className={classNames(
-                                                    window.location.pathname === item.href? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                    window.location.pathname === item.href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                                     'px-3 py-2 rounded-md text-sm font-medium'
                                                 )}
                                                 aria-current={item.current ? 'page' : undefined}
@@ -94,6 +92,7 @@ export default function Navbar() {
                                             <Menu.Item>
                                                 {({ active }) => (
                                                     <a
+                                                        href="#r"
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                         onClick={logOut}
                                                     >
@@ -119,7 +118,7 @@ export default function Navbar() {
                                         window.location.pathname === item.href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                         'block px-3 py-2 rounded-md text-base font-medium'
                                     )}
-                                    aria-current={window.location.pathname === item.href? 'page' : undefined}
+                                    aria-current={window.location.pathname === item.href ? 'page' : undefined}
                                 >
                                     {item.name}
                                 </Disclosure.Button>

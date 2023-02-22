@@ -20,7 +20,6 @@ function Login() {
         setIsEmail(validator.isEmail(loginData?.email))
         setIsPassword(loginData?.password?.length > 2)
         
-
     }
 
     const handleSubmit = async (e) => {
