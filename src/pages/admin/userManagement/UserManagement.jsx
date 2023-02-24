@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../../../helper/AdminApi";
+import { getUsers } from "../../../Api/AdminApi";
 import ListUsers from "../../../components/admin/listUsers/ListUsers";
 
 export default function UserManage() {

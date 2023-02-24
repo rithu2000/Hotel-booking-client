@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../../../redux/AlertSlice";
-import { updateHotel } from '../../../helper/AdminApi'
+import { updateHotel } from '../../../Api/AdminApi'
 import { useLocation } from "react-router-dom";
 
 export default function EditHotel() {

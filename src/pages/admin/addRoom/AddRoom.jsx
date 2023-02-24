@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../../../redux/AlertSlice";
-import { addingRoom, uploadImage } from '../../../helper/AdminApi'
+import { addingRoom, uploadImage } from '../../../Api/AdminApi'
 import { useLocation } from "react-router-dom";
 
 export default function AddRoom() {
@@ -41,11 +41,11 @@ export default function AddRoom() {
 
                 dispatch(showLoading());
                 const result = await addingRoom(addRoom, Id)
-                toast.success(result.message);
                 setRoom("")
                 setPrice("")
                 setDescription("")
                 dispatch(hideLoading());
+                toast.success(result.message);
 
             } catch (error) {
                 console.log(error);

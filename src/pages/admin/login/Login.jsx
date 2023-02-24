@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SideImage from '../../../assets/adminLogin.jpg'
 import { Toaster } from 'react-hot-toast'
-import { adminLogin } from '../../../helper/AdminApi'
+import { adminLogin } from '../../../Api/AdminApi'
 import { useNavigate } from 'react-router-dom'
 import validator from 'validator'
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../../../redux/AlertSlice";
-import { addingRoom } from '../../../helper/AdminApi'
+import { addingRoom } from '../../../Api/AdminApi'
 
 export default function EditRoom() {
 

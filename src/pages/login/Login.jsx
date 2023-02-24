@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import loginImg from '../../assets/login.jpg'
 import toast, { Toaster } from 'react-hot-toast'
-import { userLogin } from '../../helper/userApi'
+import { userLogin } from '../../Api/UserApi'
 import { Link, useNavigate } from 'react-router-dom'
 import validator from 'validator'
 
@@ -19,7 +19,7 @@ function Login() {
         setloginData({ ...loginData, [name]: value })
         setIsEmail(validator.isEmail(loginData?.email))
         setIsPassword(loginData?.password?.length > 2)
-        
+
     }
 
     const handleSubmit = async (e) => {

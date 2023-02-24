@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deletingRoom } from "../../../helper/AdminApi";
-import { roomById } from "../../../helper/AdminApi";
+import { deletingRoom } from "../../../Api/AdminApi";
+import { roomById } from "../../../Api/AdminApi";
 
 
 export default function ListRoom({ room }) {

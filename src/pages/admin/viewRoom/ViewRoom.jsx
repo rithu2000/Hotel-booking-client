@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { rooms } from "../../../helper/AdminApi";
+import { rooms } from "../../../Api/AdminApi";
 import ListRoom from "../../../components/admin/listRoom/ListRoom";
 
 function ViewRoom() {

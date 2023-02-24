@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { blockUser } from "../../../helper/AdminApi";
+import { blockUser } from "../../../Api/AdminApi";
 
 export default function ListUsers({ Item, index }) {
 

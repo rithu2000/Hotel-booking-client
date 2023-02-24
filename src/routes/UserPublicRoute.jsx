@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { getUsers } from '../helper/AdminApi';
+import { getUsers } from '../Api/AdminApi';
 import {setUser} from "../redux/UserSlice"
 
 function UserPublicRoute(props) {

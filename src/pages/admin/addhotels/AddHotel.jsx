@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../../../redux/AlertSlice";
-import { addingHotel, uploadImage } from '../../../helper/AdminApi'
+import { addingHotel, uploadImage } from '../../../Api/AdminApi'
 import { useNavigate } from "react-router-dom";
 
 export default function AddHotel() {

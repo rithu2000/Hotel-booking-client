@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { listHotels } from "../../../helper/AdminApi";
+import { listHotels } from "../../../Api/AdminApi";
 import ListHotel from "../../../components/admin/listHotels/ListHotel";
 
 export default function ViewHotel() {

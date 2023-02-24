@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { hotelById, deletingHotel, updateHotel } from "../../../helper/AdminApi";
+import { hotelById, deletingHotel, updateHotel } from "../../../Api/AdminApi";
 
 export default function ListHotel({ hotel }) {
 

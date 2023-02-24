@@ -15,8 +15,8 @@ function Home() {
         <Navbar />
         <Banner />
         <Hero />
-        <Booking />
         <Gallery />
+        <Booking />
         <Footer />
     </div>
   )

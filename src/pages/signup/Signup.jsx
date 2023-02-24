@@ -1,7 +1,7 @@
 import SignupImg from '../../assets/signup.jpg'
 import toast, { Toaster } from 'react-hot-toast'
 import { useState } from 'react'
-import { registerUser } from '../../helper/userApi'
+import { registerUser } from '../../Api/UserApi'
 import { useNavigate } from 'react-router-dom'
 import validator from 'validator'
 
