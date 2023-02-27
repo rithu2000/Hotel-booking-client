@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getByCity } from "../../Api/UserApi";
-import { hideLoading, showLoading } from "../../redux/AlertSlice";
 
 export default function ViewHotel() {
 
-    const Dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
     const [hotel, setHotel] = useState([]);
 
-
     const cityName = location?.state?.city;
-
     const city = cityName.location;
+
     const getHotelCity = async (city) => {
         try {
 
@@ -29,6 +25,7 @@ export default function ViewHotel() {
     useEffect(() => {
         getHotelCity(city);
     }, []);
+
     return (
         <>
             <div className="w-full ">
@@ -37,34 +34,36 @@ export default function ViewHotel() {
                         The Popular Hotels in {city}
                     </h1>
                 </div>
-                    <div className=" px-20 w-full ">
-                        {hotel?.map((hotel) => (
+                <div className="">
+                    {hotel?.map((hotel) => (
 
-                            <div className=" cursor-pointer w-full"
-                                onClick={() => {
-                                    navigate("/hotelInfo", { state: { hotelId: { hotel } } });
-                                }}>
-                                <div className="flex py-4 items-center border border-gray-300 rounded-lg shadow md:flex-row md:min-w-full m-5">
-                                    <div className="flex">
-                                        <img
-                                            class="object-cover ml-5 rounded-md"
-                                            src={hotel.images[0]}
-                                            style={{ width: '400px', height: '300px' }} />
-                                    </div>
-                                    <div class="p-4 leading-normal">
-                                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                            {hotel.hotel}
-                                        </h5>
-                                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                            {hotel.description}
-                                        </p>
-                                    </div>
-                                </div>
+                        <div className='border border-gray-300 p-7 rounded flex justify-between mb-5 mx-96 my-8'>
+
+                            <img src={hotel.images[0]} className='w-56 h-56 object-cover rounded-md' />
+
+                            <div className="flex flex-col gap-y-2 mt-3">
+                                <h1 className="siTitle font-bold text-xl text-[#0071c2]">{hotel.hotel}</h1>
+                                <span className="siDistance text-xs">400 m from center</span>
+                                <span className="siTexiOp text-xs bg-[#008009] text-white max-w-fit p-1 rounded px-3">Free Airport Taxi</span>
+                                <span className="siSubtitle font-bold text-xs pt-2">
+                                    Studio Apartment with Air conditioning
+                                </span>
+                                <span className="siCancelOp text-xs text-[#008009] font-bold ">Free Cancellation</span>
+                                <span className="siCancelOpSubtitle  text-sm text-[#008009] ">
+                                    You can cancel later, so lock this great deal now!
+                                </span>
+                                <span className="siCancelOp text-xs text-[red] font-bold ">Only 3 rooms left on our site</span>
                             </div>
-
-                        ))}
-                    </div>
-              
+                            <div className="flex flex-col">
+                                <button className='bg-[#0071c2] text-white py-2.5 px-2.5 border-none cursor-pointer rounded mt-16'
+                                    onClick={() => {
+                                        navigate("/hotelInfo", { state: { hotelId: { hotel } } });
+                                    }}>See availability</button>
+                                <span className="siTaxOp text-xs text-gray-400 mt-2">Book your slot now</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     );

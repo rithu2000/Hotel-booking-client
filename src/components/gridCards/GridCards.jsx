@@ -36,6 +36,36 @@ export default function Gridcards({ hotel }) {
     console.log(hotel, ",,,,,,,,,,,,,,,,,,");
     return (
         <>
+
+            <div className="w-full flex flex-col items-center my-5">
+                <h1 className="items-start text-2xl my-5">Available Rooms</h1>
+                {room?.map((room) => (
+
+                    <div className="container border-2 rounded-md mt-10">
+                        <div className="flex flex-col md:flex-row w-full rounded-lg bg-white shadow-lg">
+                            <img className="w-80 h-60 object-cover rounded-md m-3 " src={room.images[0]} alt="" />
+
+                            <div className="p-6 flex flex-col ml-20">
+                                <h5 className="text-gray-900 text-xl font-medium mb-2">{room.room}</h5>
+                                <p className="text-gray-700 text-base mb-4">
+                                    description
+                                </p>
+                                <p className="text-gray-600 text-xs">Max people : 2</p>
+                                <p className="text-gray-700 text-base mb-4">
+                                &#8377;{room.price}
+                                </p>
+                            </div>
+                            <div className="items-center w-full px-3 flex justify-end ">
+                                <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+
+            </div>
+
+
+
             {/* {hotel && */}
             <section className="container mx-auto px-6 flex items-start justify-center py-10">
                 <div className="w-full py-10">
@@ -54,17 +84,7 @@ export default function Gridcards({ hotel }) {
                                     </div>
                                     <div className="flex flex-col lg:flex-row items-start lg:items-center">
                                         <div className="w-full lg:w-1/2 pr-0 lg:pr-48">
-                                            {/* <div className="flex items-center">
-                                            <div className="w-12 h-12 rounded">
-                                            <img className="w-full h-full overflow-hidden object-cover rounded object-center" src="https://tuk-cdn.s3.amazonaws.com/assets/components/grid_cards/gc_28.png" alt="logo" />
-                                            </div>
-                                            <div className="ml-2">
-                                            <h5 className="text-gray-800 dark:text-gray-100 font-medium text-base">Fitbit Incorporation</h5>
-                                            <p className="text-gray-600 dark:text-gray-400 text-xs font-normal">San Diego, California</p>
-                                            </div>
-                                            </div>
-                                          <p className="mt-5 text-sm text-gray-600 dark:text-gray-400 font-normal">The web has witnessed mammoth advances; however a website’s success still depends on just one thing: how users interact with it.</p> */}
-                                            
+
                                             <div
                                                 id="carouselExampleCaptions"
                                                 class="carousel slide relative"
@@ -181,14 +201,6 @@ export default function Gridcards({ hotel }) {
                                                     {room.description}
                                                 </p>
                                             </div>
-                                            {/* <div className="mr-12 flex lg:block lg:mr-6 xl:mr-12 mt-5 lg:mt-0">
-                                            <h2 className="text-gray-600 dark:text-gray-400 font-bold text-xl lg:text-2xl leading-6 mb-1 lg:text-center">03</h2>
-                                            <p className="ml-2 lg:ml-0 text-gray-800 dark:text-gray-100 text-xl leading-5 text-center">Teams Assigned</p>
-                                          </div>
-                                            <div className="mt-5 flex lg:block lg:mt-0">
-                                            <h2 className="text-gray-600 dark:text-gray-400 font-bold text-xl lg:text-2xl leading-6 mb-1 lg:text-center">14</h2>
-                                            <p className="ml-2 lg:ml-0 text-gray-800 dark:text-gray-100 text-xl leading-5 text-center">Tasks Pending</p>
-                                          </div> */}
                                         </div>
                                     </div>
                                     <div className="relative">

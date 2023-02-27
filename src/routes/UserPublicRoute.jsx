@@ -26,7 +26,7 @@ function UserPublicRoute(props) {
 
     },[])
 
-    if (localStorage.getItem("token")) {
+    if (!localStorage.getItem("token")) {
         return <Navigate to="/" />;
     }
     return props.children;
