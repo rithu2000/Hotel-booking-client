@@ -1,26 +1,23 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './pages/home/Home';
-import Login from './pages/login/Login';
-import Signup from './pages/signup/Signup';
-import AdminLogin from './pages/admin/login/Login';
-import AdminHome from './pages/admin/dashboard/Dashboard';
-
-
+import UserRoute from './routes/UserRoute';
+import AdminRoute from './routes/AdminRoute';
+import LoadingSpinner from './components/spinner/Spinner';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const { loading } = useSelector((state) => state.alerts);
+
   return (
-    <BrowserRouter>
+    <>
+    {loading && <LoadingSpinner/>}
+   { !loading &&<BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/admin' element={<AdminLogin />} />
-        <Route path='/home' element={<AdminHome />} />
-
-
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Signup />} />
+        <Route path='/*' element={<UserRoute />} />
+        <Route path='/admin/*' element={<AdminRoute />} />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter>}
+    </>
   );
 }
 

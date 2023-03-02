@@ -10,7 +10,7 @@ function Banner() {
                     <h1 className='font-bold text-4xl'>Find Your special hotels</h1>
                     <h2 className='text-4xl py-4 italic'>with BookMyRoom</h2>
                     <p>
-                    Nothing makes you feel better than when you get into a hotel bed, and the sheets feel so good. Why shouldn't you wake up like that every day? Spend money on your mattress and bedding because these things make a difference on your sleep and, ultimately, your happiness.
+                        Nothing makes you feel better than when you get into a hotel bed, and the sheets feel so good. Why shouldn't you wake up like that every day? Spend money on your mattress and bedding because these things make a difference on your sleep and, ultimately, your happiness.
                     </p>
                 </div>
             </div>
