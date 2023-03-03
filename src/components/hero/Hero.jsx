@@ -1,7 +1,7 @@
 import React from 'react'
-import Bubble from '../../assets/bubble.jpeg'
-import Room from '../../assets/bedroom.jpeg'
-import Villa from '../../assets/outside.jpeg'
+import Bubble from '../../assets/bubble.jpg'
+import Room from '../../assets/bedroom.jpg'
+import Villa from '../../assets/outside.jpg'
 
 
 function Activities() {
