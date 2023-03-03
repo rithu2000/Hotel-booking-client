@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const userApi = axios.create({
-    baseURL: `${process.env.REACT_APP_SERVER_DOMAIN}/api`,
+    baseURL: `https://bookingserver.rithu.site/api`,
 });
 
 userApi.interceptors.request.use((req) => {
@@ -12,7 +12,7 @@ userApi.interceptors.request.use((req) => {
 });
 
 export const adminAPI = axios.create({
-    baseURL: `${process.env.REACT_APP_SERVER_DOMAIN}/admin`,
+    baseURL: `https://bookingserver.rithu.site/admin`,
 });
 
 adminAPI.interceptors.request.use((req) => {

@@ -106,9 +106,8 @@ export const updateDate = async (Id, UADate) => {
 }
 export const checkDate = async (Id, UA) => {
   try {
-    console.log(UA, "1111111111")
-    const data = await userApi.post(`/checkDate/${Id}`, UA)
-    console.log(data, "check Date")
+    const {data} = await userApi.post(`/checkDate/${Id}`, UA)
+
 
     return data
   } catch (error) {
@@ -119,9 +118,7 @@ export const checkDate = async (Id, UA) => {
 }
 export const bookRoom = async (Id, roomBook) => {
   try {
-    console.log(roomBook, "1111111111")
     const data = await userApi.post(`/bookRoom/${Id}`, roomBook)
-    console.log(data, "check Date")
 
     return data
   } catch (error) {

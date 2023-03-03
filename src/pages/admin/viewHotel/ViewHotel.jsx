@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { listHotels } from "../../../Api/AdminApi";
@@ -6,7 +5,7 @@ import ListHotel from "../../../components/admin/listHotels/ListHotel";
 
 export default function ViewHotel() {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [Hotel, setHotel] = useState([]);
 
   const getAllHotel = async () => {
