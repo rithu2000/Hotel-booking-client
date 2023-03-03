@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import image from '../../assets/bubble.jpeg'
+import image from '../../assets/bubble.jpg'
 
 export default function Invoice() {
 

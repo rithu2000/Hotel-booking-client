@@ -1,9 +1,9 @@
 import React from 'react'
-import OutsideView from '../../assets/gallery1.jpeg'
-import SeaView from '../../assets/gallery2.jpeg'
-import DroneView from '../../assets/gallery3.jpeg'
-import FrontView from '../../assets/gallery4.jpeg'
-import InsideView from '../../assets/gallery5.jpeg'
+import OutsideView from '../../assets/gallery1.jpg'
+import SeaView from '../../assets/gallery2.jpg'
+import DroneView from '../../assets/gallery3.jpg'
+import FrontView from '../../assets/gallery4.jpg'
+import InsideView from '../../assets/gallery5.jpg'
 
 
 function Gallery() {
