@@ -132,12 +132,9 @@ export async function hotelById() {
 
 export async function roomById(roomId) {
     try {
-        console.log(roomId, "dddddddddddddddddddd")
-        console.log("dddddddddddddddddddd")
 
         const { data } = await adminAPI.get(`/getRoomById/${roomId}`)
 
-        console.log(data)
         return data
     } catch (error) {
         return { error: "Room id caught error" }
@@ -160,6 +157,7 @@ export async function uploadImage(image) {
         formData.append("file", image);
         formData.append('upload_preset', 'hotelbooking');
         const { data } = await cloudApi.post(`/upload`, formData);
+        
         return data?.secure_url;
     } catch (error) {
         return error;

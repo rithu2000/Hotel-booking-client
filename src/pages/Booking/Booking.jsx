@@ -1,43 +1,37 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "flowbite-datepicker";
 import { check } from "../../Api/UserApi";
 import { checkDate } from "../../Api/UserApi";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import Paypal from "../Payment/Paypal";
 
 export default function Booking() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  
-  const [room, setRoom] = useState("");
+
   const [checkin, setCheckin] = useState("");
-  const [available, setAvalable] = useState(false);
   const [checkout, setCheckout] = useState("");
+
+  const [room, setRoom] = useState("");
+  const [available, setAvalable] = useState(false);
   const [adults, setAdult] = useState("");
+
   const [name, setName] = useState("");
-  const [roomDetails, setRoomDetails] = useState([]);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  const [roomDetails, setRoomDetails] = useState([]);
   const [unavailable, setUnavailable] = useState([]);
   const [pay, setPay] = useState(false);
-  
+
   const Room = location.state.roomDetails;
-  
-  const roomId = room._id;
+  const roomId = Room._id;
   const days = checkout - checkin;
 
-  console.log(checkin, "checkin");
-  console.log(checkout, "checkout");
-  console.log(name, "name");
-  console.log(roomDetails,"roomDetails")
-  console.log(email, "email");
-  console.log(phone, "phone");
-  console.log(unavailable, "unavailable");
 
-
-  const handleCheckin = (e) => {
+  const handleCheckin = async (e) => {
 
     let Checkin = e.target.value;
     let string = Checkin.split("-");
@@ -51,7 +45,6 @@ export default function Booking() {
 
   const handleCheckout = async (e) => {
     let Checkout = e.target.value;
-
     let string = Checkout.split("-");
     let Year = string[0];
     let month = string[1];
@@ -69,13 +62,13 @@ export default function Booking() {
     let UA = [];
     let start = checkin;
     let end = checkout;
-    
+
     while (start < end) {
       UA.push(start);
       start++;
     }
-    
-    let total = days * adults * room.price;
+
+    let total = days + adults * room.price;
     console.log(unavailable, "deeeeeeeee");
 
     let D = {
@@ -89,42 +82,30 @@ export default function Booking() {
       checkin,
       checkout,
     };
-    
-    console.log(D, "/??????????????????????????????");
-    setRoomDetails(D, "1111111111111111111111111111111111111111111");
-    // console.log(details,'deeeeeeeee')
-    // navigate('/payment',{state:{roomDet:{D}}})
+    setRoomDetails(D);
     setPay(true);
   };
-  console.log(roomDetails, "deeeeeeeee");
 
-  // setRoomDetails(details)
-  // console.log(roomDetails,"roomDetails.UA,UAROOMDETAILS")
+
   const checkAvalablity = async () => {
     let UA = [];
     let start = checkin;
     let end = checkout;
-    
+
     while (start < end) {
       UA.push(start);
       start++;
     }
 
     const Id = roomId;
-    console.log(UA, "this one");
-    // const UAdates=roomDetails.UA
-    console.log(UA, ";;;;;");
-    console.log(Id, "Iddd");
-    // const data = await check(Id);
     const data = await checkDate(Id, UA);
-    console.log(data, "data");
-    let available = data.data;
+    let available = data;
 
     if (available == true) {
       toast.success("Its Available Continue Booking");
       setAvalable(available);
     } else {
-      toast.error("Date is Available");
+      toast.error("Room is not available at this date");
       setAvalable("");
     }
   };
@@ -139,188 +120,207 @@ export default function Booking() {
 
   return (
     <>
-      <div className=" w-full bg-gray-900 ">
-        <section className="container mx-auto px-6 flex items-start justify-center py-10 bg-gray-600 ">
-          <div className="mr-12 flex text-xl w-full lg:text-2xl text-gray-800 bg-gray-700 dark:text-gray-900 font-bold lg:w-1/2">
-            <div className="flex w-full flex-col  bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-              <div className="flex flex-col justify-between p-4 leading-normal">
-                <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  {room.room}
-                </h6>
-                <p className="text-white text-sm">Please Fil the Following</p>
+      <div>
+        <div className="bg-orange-200 px-20 w-full">
+          <h1 className="font-semibold text-2xl py-10">
+            Your favorite room {room.room}
+          </h1>
+        </div>
 
-                <div id="deals" className="max-w-[1140px] m-auto w-full p-4">
-                  <form
-                    action=""
-                    className="lg:flex lg:justify-between w-full items-center"
-                  >
-                    <div className=" w-full ">
-                      <div className="flex flex-col text-sm text-blue-100 w-full lg:max- my-2 p-2">
-                        <label>CheckIn</label>
+        <div className="w-full m-10">
+          <h1 className="text-lg font-semibold ">
+            Please confirm your order
+          </h1>
+        </div>
+
+        <section className="container flex flex-col justify-center">
+
+
+          <div className="flex justify-center w-full">
+
+            <div className="flex w-full flex-col border rounded-lg shadow md:flex-row md:max-w-xl">
+              <div className="flex flex-col justify-between p-4 leading-normal">
+
+                <p className="text-sm font-normal">Please Check your dates</p>
+
+                <div id="deals" className="max-w-[1140px] m-auto w-full">
+
+
+                  <form className="justify-between w-full items-center">
+
+
+                    <div className="flex flex-col text-sm w-full my-2 p-2">
+                      <label>CheckIn Date</label>
+                      <input
+                        type="date"
+                        className="border rounded-md p-2"
+                        onChange={handleCheckin}
+                      />
+                    </div>
+
+                    {checkin && (
+
+                      <div className="flex text-sm flex-col w-full my-2 p-2">
+                        <label>CheckOut Date</label>
                         <input
                           type="date"
-                          className="border text-black rounded-md p-2"
-                          onChange={handleCheckin}
+                          className="border rounded-md p-2"
+                          onChange={handleCheckout}
                         />
                       </div>
-                      {checkin && (
-                        <div className="flex text-blue-100 text-sm flex-col w-full lg:max my-2 p-2">
-                          <label>CheckOut</label>
-                          <input
-                            type="date"
-                            className="border text-black rounded-md p-2"
-                            onChange={handleCheckout}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </form>
-                  {checkin & checkout && (
-                    <button
-                      // type="button"
 
-                      className="w-full text-white bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      onClick={checkAvalablity}
-                    >
+                    )}
+
+
+                  </form>
+
+                  {checkin & checkout && (
+
+                    <button onClick={checkAvalablity}
+                      className="w-full text-white bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                       Check Availability
                     </button>
+
                   )}
+
                 </div>
-                <span>
-                  <form>
-                    <div>
+
+                <form className="space-y-4 my-5">
+
+                  <div className="">
+
+                    <label for="email" className="block mb-2 text-sm font-medium">
+                      Number Of Adults
+                    </label>
+
+                    <select className="border rounded-md px-5 py-1 text-sm mb-5"
+                      onChange={(e) => {
+                        setAdult(parseInt(e.target.value));
+                      }}>
+                      <option>0</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+
+                  </div>
+
+                  <span className="text-sm ">
+                    Please enter the details of Guests
+                  </span>
+
+                  <div className="grid md:grid-cols-2 md:gap-6 mt-2">
+                    <div className="relative z-0  w-full mb-6 group">
+                      <label
+                        for="floating_first_name"
+                        className="peer-focus:font-medium absolute text-md duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        id="floating_first_name"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 md:gap-6">
+                    <div className="relative z-0 w-full mb-6 group">
+                      <label
+                        for="floating_phone"
+                        className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                      >
+                        Phone
+                      </label>
+                      <input
+                        type="number"
+                        pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                        name="phone"
+                        id="floating_phone"
+                        className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder=" "
+                        required
+                      />
+                    </div>
+
+                    <div className="relative z-0 w-full mb-6 group">
                       <label
                         for="email"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                       >
-                        Number Of Adults
+                        Email
                       </label>
-                      <select
-                        name=""
-                        id=""
-                        // onChange={handleLocation}
-                        className="border rounded-md p-2 text-sm"
-                        onChange={(e) => {
-                          setAdult(parseInt(e.target.value));
-                        }}
-                      >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                      </select>
-                    </div>
-                    <span className="text-white text-sm ">
-                      Enter the details of the Guest
-                    </span>
-
-                    <div className="grid md:grid-cols-2 md:gap-6 mt-2">
-                      <div className="relative z-0  w-full mb-6 group">
-                        <label
-                          for="floating_first_name"
-                          className="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                          Name
-                        </label>
-                        <input
-                          type="text"
-                          name="name"
-                          id="floating_first_name"
-                          className="block py-2.5 px-0 w-full text-xs text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="grid md:grid-cols-2 md:gap-6">
-                      <div className="relative z-0 w-full mb-6 group">
-                        <label
-                          for="floating_phone"
-                          className="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                          Phone
-                        </label>
-                        <input
-                          type="number"
-                          pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
-                          name="phone"
-                          id="floating_phone"
-                          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                          onChange={(e) => setPhone(e.target.value)}
-                          placeholder=" "
-                          required
-                        />
-                      </div>
-                      <div className="relative z-0 w-full mb-6 group">
-                        <label
-                          for="email"
-                          className="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          pattern
-                          id="floating_company"
-                          className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder=" "
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div class="flex items-center">
                       <input
-                        id="link-checkbox"
-                        type="checkbox"
-                        value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                        onClick={handleSubmit}
+                        type="email"
+                        name="email"
+                        pattern
+                        id="floating_company"
+                        className="block py-2.5 px-0 w-full text-md bg-transparent border-0 border-b-2 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder=" "
+                        required
                       />
-                      <label
-                        for="link-checkbox"
-                        class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                      >
-                        I agree For payment
-                      </label>
                     </div>
-                    {pay && <Paypal roomDetails={roomDetails} />}
-                  </form>
-                </span>
+
+                  </div>
+
+                  <div class="flex items-center">
+                    <input
+                      id="link-checkbox"
+                      type="checkbox"
+                      value=""
+                      class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2"
+                      onClick={handleSubmit} />
+                    <label
+                      for="link-checkbox"
+                      class="ml-2 text-sm font-medium">
+                      I agree For payment
+                    </label>
+                  </div>
+
+                  {pay && <Paypal roomDetails={roomDetails} />}
+
+                </form>
+
+
               </div>
-              <div></div>
             </div>
+
             {checkin & checkout && (
-              <div className="flex flex-col w-full p-6 lg:w-2/3 md:p-8 lg:p-12">
-                <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-                  <form className="space-y-6" action="  ">
+
+              <div className="flex flex-col mx-5">
+                <div className=" bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
+                  <form className="space-y-4">
+                    <span className="font-normal text-lg">Details</span>
                     <div>
-                      <span className="text-blue-100 text-sm">
+                      <span className="text-sm font-normal">
                         Total Guests : {adults}
                       </span>
                     </div>
                     <div>
-                      <span className="text-blue-100 text-sm">
+                      <span className="text-sm font-normal">
                         Total Days : {days}
                       </span>
                     </div>
-
-                    <button
-                      type="submit"
-                      className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >
-                      Total{days * adults * room.price}
+                    <button type="submit" className="w-52 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                      Total Amount : ₹ {days + adults * room.price}
                     </button>
                   </form>
                 </div>
               </div>
+
             )}
+
           </div>
         </section>
+
       </div>
     </>
   );

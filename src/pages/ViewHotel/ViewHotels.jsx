@@ -37,7 +37,7 @@ export default function ViewHotel() {
                 <div className="">
                     {hotel?.map((hotel) => (
 
-                        <div className='border border-gray-300 p-7 rounded flex justify-between mb-5 mx-96 my-8'>
+                        <div className='border border-gray-300 p-7 rounded flex justify-between mb-5 mx-60 my-8'>
 
                             <img src={hotel.images[0]} className='w-56 h-56 object-cover rounded-md' />
 

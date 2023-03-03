@@ -15,7 +15,7 @@ function Booking() {
     const searchHotels = async () => {
         try {
             const data = await hotelDetails()
-
+            console.log(data)
             setHotels(data)
         } catch (error) {
             console.log(error);
@@ -42,6 +42,7 @@ function Booking() {
                     <select onChange={handleLocation} className='lg:w-[300px] md:w-full border rounded-md p-2'>
                         {hotels.map((data) => (
                             <option value={data.location}>{data.location}</option>
+                            
                         ))}
                     </select>
                 </div>

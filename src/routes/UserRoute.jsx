@@ -9,14 +9,14 @@ import Payment from '../pages/Payment/Payment';
 import ViewHotel from '../pages/ViewHotel/ViewHotels';
 import Invoice from '../pages/Invoice/Invoice';
 import UserPublicRoute from './UserPublicRoute';
-import Navbar from '../components/navbar/Navbar';
-import Header from '../components/header/Header';
+import { Toaster } from 'react-hot-toast';
 
 export default function UserRoute() {
 
     return (
         <>
-        <Header />
+                <Toaster position='top-center' reverseOrder={false} />
+
             <Routes>
                 <Route exact path='/' element={<Home />} />
                 <Route exact path='/login' element={<UserProtectRouter><Login /></UserProtectRouter>} />

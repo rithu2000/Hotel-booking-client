@@ -9,7 +9,7 @@ function Header() {
     }
 
     return (
-        <div className='flex justify-between items-center px-4 py-2'>
+            <div className='flex justify-between items-center px-4 py-2'>
             <div className='flex items-center'>
                 <h1 className='text-xl font-bold text-gray-700'>BookMyRoom</h1>
             </div>
