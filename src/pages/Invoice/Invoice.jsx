@@ -1,21 +1,14 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
 import image from '../../assets/bubble.jpg'
 
 export default function Invoice() {
 
-  const location = useLocation()
-  const data = location?.state
-  console.log(data, "data")
-
-
   return (
     <>
               <div className="mt-10 flex justify-center">
-                <img class="object-cover ml-5 rounded-md" src={image} style={{width:"400px", height:"400px"}} />
+                <img class="object-cover m-auto rounded-md" src={image} style={{width:"400px", height:"400px"}} />
               </div>
 
-              <div class="flex justify-center p-4 leading-normal">
+              {/* <div class="flex justify-center p-4 leading-normal">
                 <h5 class="mb-2 text-2xl font-normal tracking-tight mr-2">
                   Hotel Name:
                 </h5>
@@ -30,7 +23,7 @@ export default function Invoice() {
                 <p class="mb-2 text-2xl font-normal tracking-tight ml-2">
                   Mandan maramandan
                 </p>
-              </div>
+              </div> */}
       <div class="bg-gray-100">
         <div class="bg-white p-6  md:mx-auto">
           <svg viewBox="0 0 24 24" class="text-green-600 w-16 h-16 mx-auto my-6">

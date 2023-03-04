@@ -1,21 +1,16 @@
-import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { updateDate } from '../../Api/UserApi';
 import Paypal from '../Payment/Paypal';
 
 export default function Payment() {
 
-
-
   const location = useLocation()
   const data = location?.state;
   const Id = data.roomDet.D.roomId
-  console.log(data, "data")
   const UADate = data.roomDet.D.UA
-  console.log(UADate, "det")
+  
   const pay = async () => {
     const data = await updateDate(Id, UADate)
-    console.log(data, 'returned Room Data')
   }
 
   return (

@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -25,12 +24,10 @@ export default function EditRoom() {
         for (let i = 0; i < image.length; i++) {
             formData.append('file', image[i]);
             formData.append('upload_preset', 'Bookit');
-            console.log(formData,"fooooormmmmmm dattaaaaaaaaa");
             const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudAPI}/image/upload`, formData)
             const imageUrl = response.data.url
             images.push(imageUrl)
         }
-        console.log(images,"imaguuuuuuuu")
         if (images.length) {
             const addRoom = {
                 // hotelId:Id,
@@ -42,10 +39,7 @@ export default function EditRoom() {
 
             try {
                 dispatch(showLoading());
-
-                console.log(addRoom, "frond add");
                 const result = await addingRoom(addRoom)
-                console.log(result,"resulttttt");
                 toast.success(result.message);
                 setRoom("")
                 setDescription("")

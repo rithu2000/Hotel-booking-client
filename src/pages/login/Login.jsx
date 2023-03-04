@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import loginImg from '../../assets/login.jpg'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { userLogin } from '../../Api/UserApi'
 import { Link, useNavigate } from 'react-router-dom'
 import validator from 'validator'
 
 
-function Login() {
+export default function Login() {
     const Navigate = useNavigate()
     const [loginData, setloginData] = useState([])
     const [isEmail, setIsEmail] = useState(false)
@@ -39,14 +39,12 @@ function Login() {
 
     }
 
-
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
             <div className='hidden sm:block'>
                 <img className='w-full h-full object-cover' src={loginImg} alt="" />
             </div>
             <div className='bg-gray-800 flex flex-col justify-center'>
-                <Toaster position='top-center' reverseOrder={false} />
                 <form className='max-w-md w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg'>
                     <h2 className='text-4xl text-white font-bold text-center'>Login</h2>
                     <div className='flex flex-col text-gray-400 py-2'>
@@ -79,6 +77,4 @@ function Login() {
             </div>
         </div>
     )
-}
-
-export default Login;
+};

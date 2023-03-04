@@ -1,36 +1,54 @@
-import React from "react";
-import { useState } from "react";
+import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import { deletingRoom } from "../../../Api/AdminApi";
 import { roomById } from "../../../Api/AdminApi";
 
-
 export default function ListRoom({ room }) {
   const navigate = useNavigate()
-  const [visible, setVisible] = useState(true);
 
   const deleteRoom = async (RoomId) => {
-    try {
 
+    try {
       await deletingRoom(RoomId);
-      setVisible(false)
     } catch (error) {
       console.log(error);
     }
+
   }
+
   const editHotel = async (RoomId) => {
+
     try {
-      console.log(RoomId, "iiiiiiiiiiiiiiiiiiidddddddddddddd")
       const data = await roomById(RoomId)
-      console.log(data, "result aaayi verunna edit hotel nte data");
     } catch (err) {
       console.log(err)
     }
+    
+  }
+
+  const DeleteButton = async () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await deleteRoom(room._id);
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    })
   }
 
   return (
     <>
-      {visible && (
         <tr class="text-gray-700">
           <td className="p-3 pt-7  text-md text-white">
             <div class="flex items-center text-sm">
@@ -59,15 +77,12 @@ export default function ListRoom({ room }) {
             </li>
             <li>
               <button className="mt-4 inline-block px-6 py-2.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-lg transition duration-150 ease-in-out"
-                onClick={() => {
-                  deleteRoom(room._id);
-                }}>
+                onClick={DeleteButton}>
                 Delete
               </button>
             </li>
           </ul>
         </tr>
-      )}
     </>
   );
 }

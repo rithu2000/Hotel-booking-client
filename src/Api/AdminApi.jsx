@@ -59,10 +59,7 @@ export async function addingRoom(addRoom, Id) {
 
 export async function rooms() {
     try {
-        console.log("room object")
         const { data } = await adminAPI.get("/getAllRoom")
-
-        console.log(data, "arooooo");
 
         return data
     } catch (error) {
@@ -73,7 +70,6 @@ export async function rooms() {
 
 export async function listHotels() {
     try {
-
         const { data } = await adminAPI.get(`/viewhotels`)
 
         return data
@@ -84,7 +80,6 @@ export async function listHotels() {
 
 export async function deleteHotel() {
     try {
-        console.log("sathanama evdeeeee");
         const data = await adminAPI.post(`/deleteHotel/:hotelId`);
 
         return data
@@ -95,11 +90,8 @@ export async function deleteHotel() {
 
 export async function deletingHotel(hotelId) {
     try {
-        console.log("deleting back")
-
         const { data } = await adminAPI.post(`/deleteHotel/${hotelId}`)
 
-        console.log(data, "response deleting")
         return data
     } catch (error) {
         return { error: "Delete error" }
@@ -108,11 +100,8 @@ export async function deletingHotel(hotelId) {
 }
 export async function deletingRoom(roomId) {
     try {
-        console.log("deleting back")
-
         const { response } = await adminAPI.post(`/deleteRoom/${roomId}`)
 
-        console.log(response, "response deleting")
         return response
     } catch (error) {
         return { error: "Delete Error" }
@@ -132,7 +121,6 @@ export async function hotelById() {
 
 export async function roomById(roomId) {
     try {
-
         const { data } = await adminAPI.get(`/getRoomById/${roomId}`)
 
         return data
@@ -142,12 +130,13 @@ export async function roomById(roomId) {
 }
 
 export async function updateHotel(update) {
+    try {
+        const { data } = await adminAPI.post('/updateHotel', update)
 
-    console.log(update, "update hotel")
-    const { data } = await adminAPI.post('/updateHotel', update)
-
-    console.log(data, "update dataaa");
-    return data
+        return data
+    } catch (error) {
+        return { error: "Update failed" }
+    }
 }
 
 
@@ -157,7 +146,7 @@ export async function uploadImage(image) {
         formData.append("file", image);
         formData.append('upload_preset', 'hotelbooking');
         const { data } = await cloudApi.post(`/upload`, formData);
-        
+
         return data?.secure_url;
     } catch (error) {
         return error;

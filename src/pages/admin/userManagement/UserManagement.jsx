@@ -12,7 +12,7 @@ export default function UserManage() {
       setUsers(userData)
     }
     apiCall()
-  },[])
+  }, [])
 
   return (
 

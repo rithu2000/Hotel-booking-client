@@ -21,20 +21,12 @@ export default function EditHotel() {
     const data = locations?.state?.hotelId;
     let Id = data.hotel._id
 
-    console.log(hotel);
-    console.log(location);
-    console.log(description);
     const cloudAPI = 'dcfbzgrgb'
 
     const getHotelById = async (hotelId) => {
-        console.log(Id, "inside")
         try {
-
-            console.log(hotelId, "hotel by Id")
             const data = await updateHotel(hotelId)
             setHotelDetail(data)
-            console.log(data, "lllllllllll")
-            console.log(data.hotel, "hotelllllllllllId")
 
         } catch (error) {
             console.log(error);
@@ -64,10 +56,7 @@ export default function EditHotel() {
 
             try {
                 dispatch(showLoading());
-
-                console.log(update, "frond add");
                 const result = await updateHotel(update)
-                console.log(result);
                 toast.success(result.message);
                 setHotel("")
                 setDescription("")
@@ -103,9 +92,9 @@ export default function EditHotel() {
                             <div>
                                 <label class="text-white dark:text-gray-200" for="category">Category</label>
                                 <select class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" onChange={(e) => setCategory(e.target.value)} value={category} required>
+                                    <option>Hotel</option>
                                     <option>Villa</option>
                                     <option>Resort</option>
-                                    <option>Hotel</option>
                                     <option>Bangalow</option>
                                 </select>
                             </div>

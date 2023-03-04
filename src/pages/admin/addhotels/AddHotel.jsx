@@ -15,9 +15,6 @@ export default function AddHotel() {
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState([])
-    console.log(hotel, "hotellllll usestate");
-    console.log(location, "location useState");
-    console.log(description, "description useState");
 
     const addHotel = async (e) => {
         e.preventDefault();
@@ -37,9 +34,7 @@ export default function AddHotel() {
             };
             try {
                 dispatch(showLoading());
-                console.log(addHotel, "frond addHotel");
                 const result = await addingHotel(addHotel)
-                console.log(result, "result aaahn");
                 toast.success(result.message);
                 setHotel("")
                 setLocation("")
@@ -56,7 +51,6 @@ export default function AddHotel() {
 
     return (
         <div>
-            <Toaster position='top-center' reverseOrder={false} />
             <div>
                 <section class="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 mt-20">
                     <h1 class="text-xl font-bold text-white capitalize dark:text-white">Add Hotel</h1>

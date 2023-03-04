@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import SideImage from '../../../assets/adminLogin.jpg'
-import { Toaster } from 'react-hot-toast'
 import { adminLogin } from '../../../Api/AdminApi'
 import { useNavigate } from 'react-router-dom'
 import validator from 'validator'
-
+import { toast } from 'react-hot-toast'
 
 function Login() {
 
@@ -13,7 +12,6 @@ function Login() {
     const [isEmail, setIsEmail] = useState(false)
     const [isPassword, setIsPassword] = useState(false)
     const [submit, setSubmit] = useState(false)
-
 
     const handleChange = (e) => {
 
@@ -33,6 +31,7 @@ function Login() {
         if (response.status) {
             localStorage.setItem("adminToken", response.token);
             Navigate('/admin/')
+            toast.success('Login Successfull')
         }
         
     }
@@ -44,7 +43,6 @@ function Login() {
                 <img className='w-full h-full object-cover' src={SideImage} alt="" />
             </div>
             <div className='bg-gray-800 flex flex-col justify-center'>
-                <Toaster position='top-center' reverseOrder={false} />
                 <form className='max-w-md w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg'>
                     <h2 className='text-4xl text-white font-bold text-center'>Admin Login</h2>
                     <div className='flex flex-col text-gray-400 py-2'>
