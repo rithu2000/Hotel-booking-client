@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import "flowbite-datepicker";
-import { check } from "../../Api/UserApi";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { checkDate } from "../../Api/UserApi";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import Paypal from "../Payment/Paypal";
 
 export default function Booking() {
-
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [checkin, setCheckin] = useState("");
@@ -23,34 +20,34 @@ export default function Booking() {
   const [phone, setPhone] = useState("");
 
   const [roomDetails, setRoomDetails] = useState([]);
-  const [unavailable, setUnavailable] = useState([]);
   const [pay, setPay] = useState(false);
 
   const Room = location.state.roomDetails;
   const roomId = Room._id;
   const days = checkout - checkin;
 
+  const minDate = new Date().toISOString().split('T')[0];
 
   const handleCheckin = async (e) => {
 
-    let Checkin = e.target.value;
-    let string = Checkin.split("-");
-    let Year = string[0];
-    let month = string[1];
-    let day = string[2];
-    let checkinFormat = parseInt(Year + month + day)
+    const Checkin = e.target.value;
+    const string = Checkin.split("-");
+    const Year = string[0];
+    const month = string[1];
+    const day = string[2];
+    const checkinFormat = parseInt(Year + month + day)
     setCheckin(checkinFormat);
 
   };
 
   const handleCheckout = async (e) => {
-    let Checkout = e.target.value;
-    let string = Checkout.split("-");
-    let Year = string[0];
-    let month = string[1];
-    let day = string[2];
+    const Checkout = e.target.value;
+    const string = Checkout.split("-");
+    const Year = string[0];
+    const month = string[1];
+    const day = string[2];
 
-    let checkoutFormat = parseInt(Year + month + day)
+    const checkoutFormat = parseInt(Year + month + day)
 
     if (checkoutFormat > checkin) {
       setCheckout(checkoutFormat);
@@ -68,10 +65,9 @@ export default function Booking() {
       start++;
     }
 
-    let total = days + adults * room.price;
-    console.log(unavailable, "deeeeeeeee");
+    const total = days + adults * room.price;
 
-    let D = {
+    const D = {
       UA,
       name,
       adults,
@@ -99,7 +95,7 @@ export default function Booking() {
 
     const Id = roomId;
     const data = await checkDate(Id, UA);
-    let available = data;
+    const available = data;
 
     if (available == true) {
       toast.success("Its Available Continue Booking");
@@ -109,8 +105,6 @@ export default function Booking() {
       setAvalable("");
     }
   };
-
-  console.log(available, "Available");
 
   useEffect(() => {
     if (Room) {
@@ -135,7 +129,6 @@ export default function Booking() {
 
         <section className="container flex flex-col justify-center">
 
-
           <div className="flex justify-center w-full">
 
             <div className="flex w-full flex-col border rounded-lg shadow md:flex-row md:max-w-xl">
@@ -145,13 +138,11 @@ export default function Booking() {
 
                 <div id="deals" className="max-w-[1140px] m-auto w-full">
 
-
                   <form className="justify-between w-full items-center">
-
 
                     <div className="flex flex-col text-sm w-full my-2 p-2">
                       <label>CheckIn Date</label>
-                      <input
+                      <input min={minDate}
                         type="date"
                         className="border rounded-md p-2"
                         onChange={handleCheckin}
@@ -170,7 +161,6 @@ export default function Booking() {
                       </div>
 
                     )}
-
 
                   </form>
 
@@ -288,8 +278,6 @@ export default function Booking() {
                   {pay && <Paypal roomDetails={roomDetails} />}
 
                 </form>
-
-
               </div>
             </div>
 

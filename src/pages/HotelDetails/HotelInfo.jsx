@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getHotelData } from "../../Api/UserApi";
 import Gridcards from "../../components/gridCards/GridCards";
@@ -19,14 +19,17 @@ export default function HotelInfo() {
     }
   };
 
-
-
   useEffect(() => {
     getHotel(Id);
   }, []);
-  return (
 
+  return (
     <>
+    <div className="bg-blue-200 px-20 w-full">
+                    <h1 className="font-semibold text-2xl py-10">
+                        This is the Famous Hotel in {hotel.location}
+                    </h1>
+                </div>
 
       <h1 className="text-3xl text-center my-4">Hotel Details</h1>
       {hotel && (
@@ -65,9 +68,7 @@ export default function HotelInfo() {
           </div>
         </div>
       )}
-
       {hotel && <Gridcards hotel={hotel} />}
-
     </>
   )
-}
+};

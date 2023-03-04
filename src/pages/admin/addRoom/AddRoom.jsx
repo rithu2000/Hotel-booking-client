@@ -1,6 +1,5 @@
-import React from "react";
 import { useState } from "react";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../../../redux/AlertSlice";
 import { addingRoom, uploadImage } from '../../../Api/AdminApi'
@@ -41,10 +40,10 @@ export default function AddRoom() {
 
                 dispatch(showLoading());
                 const result = await addingRoom(addRoom, Id)
+                dispatch(hideLoading());
                 setRoom("")
                 setPrice("")
                 setDescription("")
-                dispatch(hideLoading());
                 toast.success(result.message);
 
             } catch (error) {
@@ -55,7 +54,6 @@ export default function AddRoom() {
     return (
         <>
             <div>
-            <Toaster position='top-center' reverseOrder={false} />
                 <div>
                     <section class="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 mt-20">
                         <h1 class="text-xl font-bold text-white capitalize dark:text-white">Add Room</h1>

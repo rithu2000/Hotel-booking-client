@@ -12,7 +12,6 @@ import ViewRoom from "../pages/admin/viewRoom/ViewRoom";
 import EditRoom from "../pages/admin/editRoom/EditRoom";
 import EditHotel from "../pages/admin/editHotel/EditHotel";
 
-
 export default function AdminRoute() {
 
     return (

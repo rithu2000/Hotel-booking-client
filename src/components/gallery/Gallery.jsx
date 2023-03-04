@@ -1,13 +1,11 @@
 import React from 'react'
-import OutsideView from '../../assets/gallery1.jpg'
-import SeaView from '../../assets/gallery2.jpg'
-import DroneView from '../../assets/gallery3.jpg'
-import FrontView from '../../assets/gallery4.jpg'
-import InsideView from '../../assets/gallery5.jpg'
-
+import OutsideView from '../../assets/Swimming.jpg'
+import SeaView from '../../assets/Topview.jpg'
+import DroneView from '../../assets/wideview.jpg'
+import FrontView from '../../assets/Seaview.jpg'
+import InsideView from '../../assets/Lounge.jpg'
 
 function Gallery() {
-
 
     return (
         <div id='gallery' className="max-w-[1140px] m-auto w-full px-4">

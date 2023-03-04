@@ -1,16 +1,14 @@
 import SignupImg from '../../assets/signup.jpg'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { useState } from 'react'
 import { registerUser } from '../../Api/UserApi'
 import { useNavigate } from 'react-router-dom'
 import validator from 'validator'
 
-
-function Signup() {
+export default function Signup() {
 
     const navigate = useNavigate()
     const [signupData, setSignupData] = useState({})
-
     const [isFirstName, setIsFirstName] = useState(false)
     const [isLastName, setIsLastName] = useState(false)
     const [isEmail, setIsEmail] = useState(false)
@@ -41,12 +39,10 @@ function Signup() {
             }
         }
     }
-    console.log(signupData);
 
     return (
         <div className="min-h-screen py-40 " style={{ backgroundImage: 'linear-gradient(115deg, #181818, #5D5D5D)' }}>
             <div className="container mx-auto">
-                <Toaster position='top-center' reverseOrder={false} />
                 <div className="flex flex-col lg:flex-row w-10/12 lg:w-9/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden">
                     <div className='w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-no-repeat bg-cover bg-center' style={{ backgroundImage: `url(${SignupImg})` }}>
                         <h1 className='text-white text-3xl mb-3'>Welcome</h1>
@@ -104,6 +100,4 @@ function Signup() {
             </div>
         </div>
     )
-}
-
-export default Signup;
+};

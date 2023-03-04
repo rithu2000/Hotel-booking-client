@@ -3,7 +3,6 @@ import Bubble from '../../assets/bubble.jpg'
 import Room from '../../assets/bedroom.jpg'
 import Villa from '../../assets/outside.jpg'
 
-
 function Activities() {
   return (
     <div className="max-w-[1140px] m-auto w-full md:flex mt-[-75px]">

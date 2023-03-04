@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import Navbar from "../components/navbar";
 import { bookings } from '../Api/userApi/UserRequest'
 
 export default function Mybooking() {
@@ -30,7 +29,6 @@ export default function Mybooking() {
     }, [])
     return (
         <>
-            <Navbar />
             {/* <div className=" w-full   "> */}
             <div className="w-full ">
                 <div className="container mx-auto flex items-start justify-center ">
@@ -80,9 +78,6 @@ export default function Mybooking() {
                                                     {<br />}
                                                     Booked Price:{book.total}
                                                 </p>
-
-
-
                                                 {book?.status ? (
 
                                                     <button className="bg-green-600">Exist</button>
@@ -93,17 +88,9 @@ export default function Mybooking() {
 
                                                 {/* <button className="bg-green-300">Available</button> */}
 
-
-
-
-
                                             </div>
                                         </div>
                                     ))}
-
-
-
-
 
                                 </div>
                                 {/* // ))} */}

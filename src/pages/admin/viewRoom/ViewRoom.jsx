@@ -8,10 +8,7 @@ function ViewRoom() {
 
     const getAllRoom = async () => {
         try {
-            console.log("first");
-
             const data = await rooms();
-
             setRoom(data);
         } catch (error) {
             console.log(error);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getByCity } from "../../Api/UserApi";
 
@@ -12,14 +12,14 @@ export default function ViewHotel() {
     const city = cityName.location;
 
     const getHotelCity = async (city) => {
-        try {
 
+        try {
             const data = await getByCity(city);
             setHotel(data);
-
         } catch (err) {
             console.log(err);
         }
+
     };
 
     useEffect(() => {
@@ -67,4 +67,4 @@ export default function ViewHotel() {
             </div>
         </>
     );
-}
+};

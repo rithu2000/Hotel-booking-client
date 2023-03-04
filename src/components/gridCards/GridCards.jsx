@@ -25,19 +25,13 @@ export default function Gridcards({ hotel }) {
     }, []);
 
     return (
-
         <>
-
-
-
-        
             <div className="w-full flex flex-col items-center my-5">
                 <h1 className="items-start text-2xl my-5">Available Rooms</h1>
                 {room?.map((room) => (
-
                     <div className="container border-2 rounded-md mt-10">
                         <div className="flex flex-col md:flex-row w-full rounded-lg bg-white shadow-lg">
-                            <img className="w-80 h-60 object-cover rounded-md m-3 " src={room.images[0]} />
+                            <img className="w-96 h-80 object-cover rounded-md m-3 " src={room.images[0]} />
 
                             <div className="p-6 flex flex-col ml-20">
                                 <h5 className="text-gray-900 text-xl font-medium mb-2">{room.room}</h5>
