@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { FaFacebookF, FaTwitter, FaGithub, FaInstagram, FaBars } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
 
@@ -16,7 +17,7 @@ function Navbar() {
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="#hgh">Blogs</a>
+                    <Link to="/mybooking">MyBookings</Link>
                 </li>
                 <li>
                     <a href="#jhghj">Contact</a>
@@ -40,7 +41,7 @@ function Navbar() {
                         <a href="/">Home</a>
                     </li>
                     <li className='text-2xl py-8'>
-                        <a href="#jj">Gallery</a>
+                        <a href="#jj">MyBookings</a>
                     </li>
                     <li className='text-2xl py-8'>
                         <a href="#jgg">Deals</a>

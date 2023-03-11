@@ -4,9 +4,12 @@ import { useLocation } from "react-router-dom";
 import { checkDate } from "../../Api/UserApi";
 import { toast } from "react-hot-toast";
 import Paypal from "../Payment/Paypal";
+import { useSelector } from "react-redux";
 
 export default function Booking() {
   const location = useLocation();
+  const user = useSelector((state) => state.user.user)
+  const userId = user._id
 
   const [checkin, setCheckin] = useState("");
   const [checkout, setCheckout] = useState("");
@@ -74,6 +77,7 @@ export default function Booking() {
       email,
       phone,
       roomId,
+      userId,
       total,
       checkin,
       checkout,
@@ -97,7 +101,7 @@ export default function Booking() {
     const data = await checkDate(Id, UA);
     const available = data;
 
-    if (available == true) {
+    if (available === true) {
       toast.success("Its Available Continue Booking");
       setAvalable(available);
     } else {

@@ -9,7 +9,7 @@ const navigation = [
     { name: 'User Management', href: '/admin/userlist' },
     { name: 'Rooms', href: '/admin/Rooms' },
     { name: 'Hotels', href: '/admin/hotels' },
-    {name: 'Bookings', href: '/admin/bookings'},
+    {name: 'Bookings', href: '/admin/booking'},
 ]
 
 function classNames(...classes) {

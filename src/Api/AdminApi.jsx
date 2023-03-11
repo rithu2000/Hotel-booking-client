@@ -14,7 +14,6 @@ export async function adminLogin(credentials) {
 
 export async function getUsers() {
     try {
-
         const { data } = await adminAPI.get(`/user-management`)
 
         return data
@@ -152,3 +151,52 @@ export async function uploadImage(image) {
         return error;
     }
 };
+
+export const getChartData = async () => {
+    try {
+        const { data } = await adminAPI.get("/getChart");
+
+        return data
+    } catch (error) {
+
+    }
+}
+export const monthgraph = async () => {
+    try {
+        const data = await adminAPI.get('/getrevenue')
+
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getBookedRoom = async (Id) => {
+    try {
+        const { data } = await adminAPI.get(`/getRoomById/${Id}`)
+
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getAllBookings = async () => {
+    try {
+        const { data } = await adminAPI.get('/getAllBooking')
+
+        return data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const ChangeStatus = async (isActive, userId) => {
+    try {
+        const response = await adminAPI.get(`/changeBookingStatus/${isActive}/${userId}`)
+
+        return response.data
+    } catch (error) {
+        console.log(error);
+    }
+}

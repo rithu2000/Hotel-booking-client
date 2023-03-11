@@ -11,6 +11,8 @@ import AddRoom from "../pages/admin/addRoom/AddRoom";
 import ViewRoom from "../pages/admin/viewRoom/ViewRoom";
 import EditRoom from "../pages/admin/editRoom/EditRoom";
 import EditHotel from "../pages/admin/editHotel/EditHotel";
+import BookDetails from "../pages/admin/Bookings/BookDetails";
+import BookingManage from "../pages/admin/Bookings/BookingManage";
 
 export default function AdminRoute() {
 
@@ -61,9 +63,19 @@ export default function AdminRoute() {
                         <EditRoom />
                     </ProtectedRoute>
                 } />
-                 <Route exact path="/editHotel" element={
+                <Route exact path="/editHotel" element={
                     <ProtectedRoute>
                         <EditHotel />
+                    </ProtectedRoute>
+                } />
+                <Route exact path="/bookedRoom" element={
+                    <ProtectedRoute>
+                        <BookDetails />
+                    </ProtectedRoute>
+                } />
+                <Route exact path="/booking" element={
+                    <ProtectedRoute>
+                        <BookingManage />
                     </ProtectedRoute>
                 } />
             </Routes>

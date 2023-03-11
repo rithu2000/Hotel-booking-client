@@ -9,6 +9,7 @@ import Payment from '../pages/Payment/Payment';
 import ViewHotel from '../pages/ViewHotel/ViewHotels';
 import Invoice from '../pages/Invoice/Invoice';
 import UserPublicRoute from './UserPublicRoute';
+import Mybooking from '../pages/Mybookings/Mybooking';
 
 export default function UserRoute() {
 
@@ -24,6 +25,8 @@ export default function UserRoute() {
                 <Route exact path='/payment' element={<UserPublicRoute><Payment /></UserPublicRoute>} />
                 <Route exact path='/viewhotel' element={<ViewHotel />} />
                 <Route exact path='/invoice' element={<UserPublicRoute><Invoice /></UserPublicRoute>} />
+                <Route exact path='/mybooking' element={<UserPublicRoute><Mybooking /></UserPublicRoute>} />
+
             </Routes>
         </>
     )

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../../../redux/AlertSlice";
 import { addingHotel, uploadImage } from '../../../Api/AdminApi'

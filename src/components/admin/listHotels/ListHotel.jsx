@@ -1,7 +1,7 @@
 import React from "react";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
-import { deletingHotel, updateHotel } from "../../../Api/AdminApi";
+import { deletingHotel } from "../../../Api/AdminApi";
 
 export default function ListHotel({ hotel }) {
 
@@ -13,16 +13,6 @@ export default function ListHotel({ hotel }) {
       await deletingHotel(HotelId);
     } catch (error) {
       console.log(error);
-    }
-
-  }
-
-  const editHotel = async (HotelId) => {
-
-    try {
-      const data = await updateHotel(HotelId)
-    } catch (err) {
-      console.log(err)
     }
 
   }

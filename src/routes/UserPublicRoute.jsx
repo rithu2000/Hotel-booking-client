@@ -1,23 +1,27 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import jwt_decode from 'jwt-decode'
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { getUsers } from '../Api/AdminApi';
 import { setUser } from "../redux/UserSlice"
+import { getUserDetails } from '../Api/UserApi';
 
 function UserPublicRoute(props) {
 
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user)
 
   useEffect(() => {
     const routerFunction = async () => {
-      if (localStorage.getItem("token")) {
-        let userData = await getUsers();
+      const token = localStorage.getItem("token")
+      const decodedToken = jwt_decode(token)
+      const userId = decodedToken.userId;
+      if (userId) {
+        const userData = await getUserDetails(userId);
         if (userData) {
           dispatch(
-            setUser({
-              user: userData,
-            })
+            setUser(userData)
           );
+          console.log(userData)
         }
       }
     }
@@ -25,9 +29,11 @@ function UserPublicRoute(props) {
   }, [])
 
   if (!localStorage.getItem("token")) {
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
-  return props.children;
+  if (user.user) {
+    return props.children;
+  }
 }
 
 export default UserPublicRoute;
