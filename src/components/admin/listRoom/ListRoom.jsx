@@ -1,7 +1,6 @@
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import { deletingRoom } from "../../../Api/AdminApi";
-import { roomById } from "../../../Api/AdminApi";
 
 export default function ListRoom({ room }) {
   const navigate = useNavigate()
@@ -14,16 +13,6 @@ export default function ListRoom({ room }) {
       console.log(error);
     }
 
-  }
-
-  const editHotel = async (RoomId) => {
-
-    try {
-      const data = await roomById(RoomId)
-    } catch (err) {
-      console.log(err)
-    }
-    
   }
 
   const DeleteButton = async () => {

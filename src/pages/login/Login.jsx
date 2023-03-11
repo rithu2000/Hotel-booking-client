@@ -4,10 +4,12 @@ import toast from 'react-hot-toast'
 import { userLogin } from '../../Api/UserApi'
 import { Link, useNavigate } from 'react-router-dom'
 import validator from 'validator'
+import { useDispatch } from 'react-redux'
 
 
 export default function Login() {
     const Navigate = useNavigate()
+    const dispatch = useDispatch()
     const [loginData, setloginData] = useState([])
     const [isEmail, setIsEmail] = useState(false)
     const [isPassword, setIsPassword] = useState(false)
@@ -28,7 +30,6 @@ export default function Login() {
         setSubmit(true)
 
         const response = await userLogin(loginData)
-         console.log(response.token);
         if (response.error) {
             toast.error(response.error)
         } else {

@@ -22,7 +22,6 @@ export async function registerUser(credentials) {
 
 export async function userLogin(credentials) {
   try {
-
     const { data } = await userApi.post(`/login`, credentials, { withCredentials: true })
 
     return data
@@ -30,6 +29,15 @@ export async function userLogin(credentials) {
     return { error: 'login failed' }
   }
 };
+
+export async function getUserDetails(userId) {
+  try {
+    const { data } = await userApi.post(`/getuser/${userId}`)
+    return data;
+  } catch (error) {
+    return { error: "cannot fetch the data" }
+  }
+}
 
 export async function hotelDetails() {
   try {
@@ -44,7 +52,7 @@ export async function hotelDetails() {
 export const getByCity = async (city) => {
   try {
     const { data } = await userApi.get(`/getHotelByCity/${city}`, city);
-    
+
     return data;
   } catch (error) {
     return { error: 'Cannot fetch the data' }
@@ -93,7 +101,7 @@ export const updateDate = async (Id, UADate) => {
 
 export const checkDate = async (Id, UA) => {
   try {
-    const {data} = await userApi.post(`/checkDate/${Id}`, UA)
+    const { data } = await userApi.post(`/checkDate/${Id}`, UA)
 
     return data
   } catch (error) {
@@ -108,5 +116,17 @@ export const bookRoom = async (Id, roomBook) => {
     return data
   } catch (error) {
     return { error: 'Booking error' }
+  }
+};
+
+export const bookings = async (Id) => {
+  try {
+    const { data } = await userApi.get(`/getMyBookings/${Id}`)
+
+    console.log(data, "1234567890");
+
+    return data
+  } catch (error) {
+    return { error: "Something went wrong" }
   }
 };
