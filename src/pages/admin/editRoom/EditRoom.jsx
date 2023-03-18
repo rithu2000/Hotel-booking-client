@@ -1,36 +1,47 @@
-import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../../../redux/AlertSlice";
-import { addingRoom } from '../../../Api/AdminApi'
+import { updateRoom, uploadImage } from '../../../Api/AdminApi'
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function EditRoom() {
 
+    const navigate = useNavigate()
     const dispatch = useDispatch();
+    const location = useLocation();
+    const Details = location?.state?.roomId;
+    const Room = Details.room;
+    const roomId = Room._id
 
-    const [room, setRoom] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
+    const [room, setRoom] = useState(Room.room);
+    const [price, setPrice] = useState(Room.price);
+    const [description, setDescription] = useState(Room.description);
     const [image, setImage] = useState([])
+    const [errMessage, seterrMessage] = useState('')
 
-    const cloudAPI = 'dxrzjyxr8'
+
     const addRoom = async (e) => {
         e.preventDefault();
-        dispatch(showLoading());
+        if (room.trim().length > 0 && price.trim().length > 0 && description.trim().length > 0) {
 
-        const formData = new FormData();
-        let images = []
+            
+            let images = []
+            if (image.length > 0) {
+
+            dispatch(showLoading());
+
         for (let i = 0; i < image.length; i++) {
-            formData.append('file', image[i]);
-            formData.append('upload_preset', 'Bookit');
-            const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudAPI}/image/upload`, formData)
-            const imageUrl = response.data.url
-            images.push(imageUrl)
+            const url = await uploadImage(image[i])
+            console.log("success");
+            images.push(url)
         }
+    } else {
+        return seterrMessage("Please upload an image")
+    }
+
         if (images.length) {
             const addRoom = {
-                // hotelId:Id,
                 room,
                 price,
                 description,
@@ -39,18 +50,23 @@ export default function EditRoom() {
 
             try {
                 dispatch(showLoading());
-                const result = await addingRoom(addRoom)
+                const result = await updateRoom(addRoom, roomId)
                 toast.success(result.message);
                 setRoom("")
                 setDescription("")
                 setPrice("")
                 setImage("")
                 dispatch(hideLoading());
+                navigate("/admin/Rooms");
             } catch (error) {
                 console.log(error);
             }
         }
-        // console.log(response);
+    } else {
+        seterrMessage("Please fill the form")
+        dispatch(hideLoading());
+    }
+
     };
 
 
@@ -91,6 +107,7 @@ export default function EditRoom() {
                                     </div>
                                 </div>
                             </div>
+                            {errMessage && <p className="text-red-700">{errMessage}</p>}
                         </div>
                         <div class="flex justify-end mt-6">
                             <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600" onClick={addRoom} >Confirm</button>
