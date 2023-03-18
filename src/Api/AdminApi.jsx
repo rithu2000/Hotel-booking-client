@@ -128,13 +128,26 @@ export async function roomById(roomId) {
     }
 }
 
-export async function updateHotel(update) {
+export async function updateHotel(update, Id) {
     try {
-        const { data } = await adminAPI.post('/updateHotel', update)
+        console.log("1234567890");
+        const { data } = await adminAPI.put(`/updateHotel/${Id}`, update)
 
         return data
     } catch (error) {
         return { error: "Update failed" }
+    }
+}
+
+export const updateRoom = async (update, Id) => {
+    console.log(update,"123456");
+    console.log(Id,"qwert");
+    try {
+        const { data } = await adminAPI.put(`/updateRoom/${Id}`, update)
+
+        return data
+    } catch (error) {
+        return { error: "update failed" }
     }
 }
 
@@ -198,5 +211,34 @@ export const ChangeStatus = async (isActive, userId) => {
         return response.data
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const getBookingTotal = async () => {
+    try {
+        const data = await adminAPI.get('/getBookingTotal')
+
+        return data.data
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const revenueTotal = async () => {
+    try {
+        const data = await adminAPI.get('/totalRevenue')
+        return data.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const userTotal = async () => {
+    try {
+        const data = await adminAPI.get('/totalUser')
+        return data.data
+    } catch (error) {
+        console.log(error)
     }
 }

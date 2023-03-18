@@ -16,39 +16,51 @@ export default function AddRoom() {
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState([])
+    const [errMessage, seterrMessage] = useState('')
+
 
     const addRoom = async (e) => {
         e.preventDefault();
-        dispatch(showLoading());
-        let images = []
+        if (room.trim().length > 0 && price.trim().length > 0 && description.trim().length > 0) {
 
-        for (let i = 0; i < image.length; i++) {
-            const url = await uploadImage(image[i])
-            images.push(url)
-        }
-
-        if (images.length) {
-            const addRoom = {
-                hotelId: Id,
-                room,
-                price,
-                description,
-                images,
-            };
-
-            try {
+            let images = []
+            if (images.length > 0) {
 
                 dispatch(showLoading());
-                const result = await addingRoom(addRoom, Id)
-                dispatch(hideLoading());
-                setRoom("")
-                setPrice("")
-                setDescription("")
-                toast.success(result.message);
-
-            } catch (error) {
-                console.log(error);
+                for (let i = 0; i < image.length; i++) {
+                    const url = await uploadImage(image[i])
+                    images.push(url)
+                }
+            } else {
+                return seterrMessage("Please upload an image")
             }
+
+            if (images.length) {
+                const addRoom = {
+                    hotelId: Id,
+                    room,
+                    price,
+                    description,
+                    images,
+                };
+
+                try {
+
+                    dispatch(showLoading());
+                    const result = await addingRoom(addRoom, Id)
+                    dispatch(hideLoading());
+                    setRoom("")
+                    setPrice("")
+                    setDescription("")
+                    toast.success(result.message);
+
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        } else {
+            seterrMessage("Please fill the form")
+            dispatch(hideLoading());
         }
     }
     return (
@@ -95,6 +107,8 @@ export default function AddRoom() {
                                         </div>
                                     </div>
                                 </div>
+                            {errMessage && <p className="text-red-700">{errMessage}</p>}
+
                             </div>
                             <div class="flex justify-end mt-6">
                                 <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600" onClick={addRoom}>Confirm</button>
