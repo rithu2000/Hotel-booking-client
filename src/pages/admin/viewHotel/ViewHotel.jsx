@@ -8,8 +8,9 @@ export default function ViewHotel() {
   const navigate = useNavigate();
   const [Hotel, setHotel] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  // const [itemsPerPage, setItemsPerPage] = useState(6);
 
+  const itemsPerPage = 6;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -21,15 +22,15 @@ export default function ViewHotel() {
     pageNumbers.push(i);
   }
 
-  const renderPageNumbers = pageNumbers.map(number => {
-    return (
-      <li key={number}>
-        <button onClick={() => setCurrentPage(number)}>
-          {number}
-        </button>
-      </li>
-    );
-  });
+  // const renderPageNumbers = pageNumbers.map(number => {
+  //   return (
+  //     <li key={number}>
+  //       <button onClick={() => setCurrentPage(number)}>
+  //         {number}
+  //       </button>
+  //     </li>
+  //   );
+  // });
 
   const handleNextClick = () => {
     setCurrentPage(currentPage + 1);
