@@ -4,12 +4,12 @@ import toast from 'react-hot-toast'
 import { userLogin } from '../../Api/UserApi'
 import { Link, useNavigate } from 'react-router-dom'
 import validator from 'validator'
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 
 
 export default function Login() {
     const Navigate = useNavigate()
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const [loginData, setloginData] = useState([])
     const [isEmail, setIsEmail] = useState(false)
     const [isPassword, setIsPassword] = useState(false)
@@ -54,7 +54,7 @@ export default function Login() {
                     </div>
                     <div>
                         {!loginData.email && submit ? <small className='text-red-500'>*Please enter an email</small> : null}
-                        {!isEmail && loginData.email ? <small className='text-red-500'>Please enter a valid email</small> : null}
+                        {!isEmail && loginData.email ? <small className='text-red-500'>*Please enter a valid email</small> : null}
                     </div>
                     <div className='flex flex-col text-gray-400 py-2 pb-6'>
                         <label>Password</label>
@@ -62,7 +62,7 @@ export default function Login() {
                     </div>
                     <div>
                         {!loginData.password && submit ? <small className='text-red-500'>*Please enter password</small> : null}
-                        {!isPassword && loginData.password ? <small className='text-red-500'>Please enter a valid password</small> : null}
+                        {!isPassword && loginData.password ? <small className='text-red-500'>*Please enter a valid password</small> : null}
                     </div>
                     {/* <div className='flex justify-between text-gray-400 py-2'>
                     <p></p>
