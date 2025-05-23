@@ -1,15 +1,16 @@
 import { React, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 import { showLoading, hideLoading } from "../../../redux/AlertSlice";
 import { updateHotel, uploadImage } from '../../../Api/AdminApi'
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function EditHotel() {
 
     const dispatch = useDispatch();
-    const locations = useLocation()
+    const locations = useLocation();
+    const navigate = useNavigate();
+
 
     const data = locations?.state?.hotelId;
     const hotelData = data.hotel
@@ -19,7 +20,7 @@ export default function EditHotel() {
     const [location, setLocation] = useState(hotelData.location);
     const [category, setCategory] = useState(hotelData.category);
     const [description, setDescription] = useState(hotelData.description);
-    const [image, setImage] = useState(hotelData.images);
+    const [image, setImage] = useState([]);
     const [errMessage, seterrMessage] = useState('')
 
 
@@ -27,15 +28,11 @@ export default function EditHotel() {
         e.preventDefault();
         if (hotel.trim().length > 0 && location.trim().length > 0 && description.trim().length > 0 && category.length > 0) {
 
-            // dispatch(showLoading());
-            console.log(image, "usestater");
-
+            dispatch(showLoading());
             let images = []
 
             if (image.length > 0) {
-
-                console.log(image, "lengthhhhhhhh");
-                for (let i = 0; i < image; i++) {
+                for (let i = 0; i < image.length; i++) {
                     const url = await uploadImage(image[i])
                     console.log("success");
                     images.push(url)
@@ -43,7 +40,8 @@ export default function EditHotel() {
             } else {
                 return seterrMessage("Please upload an image")
             }
-            if (images) {
+
+            if (images.length) {
                 const update = {
                     hotel,
                     location,
@@ -51,19 +49,16 @@ export default function EditHotel() {
                     category,
                     images,
                 };
-
                 try {
-                    // dispatch(showLoading());
-                    console.log("qwerty");
+                    dispatch(showLoading());
                     const result = await updateHotel(update, Id)
-                    console.log("ytrewq");
-                    console.log(result);
                     toast.success(result.message);
                     setHotel("")
                     setDescription("")
                     setLocation("")
                     setImage("")
-                    // dispatch(hideLoading());
+                    dispatch(hideLoading());
+                    navigate('/admin/hotels')
                 } catch (error) {
                     console.log(error);
                 }
@@ -117,7 +112,7 @@ export default function EditHotel() {
                                         <div className="flex text-sm text-gray-600">
                                             <label for="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                 <span className="">Upload a file</span>
-                                                <input id="file-upload" name="image" accept="image/*" onChange={(e) => setImage(...image, e.target.files[0])} type="file" class="sr-only" />
+                                                <input id="file-upload" name="image" accept="image/*" onChange={(e) => setImage([...image, e.target.files[0]])} type="file" class="sr-only" />
                                             </label>
                                             <p className="pl-1 text-white">or drag and drop</p>
                                         </div>
@@ -126,7 +121,7 @@ export default function EditHotel() {
                                         </p>
                                     </div>
                                 </div>
-                            {errMessage && <p className="text-red-700">{errMessage}</p>}
+                                {errMessage && <p className="text-red-700">{errMessage}</p>}
 
                             </div>
                             {/* <div className="flex">

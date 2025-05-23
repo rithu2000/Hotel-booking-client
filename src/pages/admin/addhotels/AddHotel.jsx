@@ -8,38 +8,38 @@ import { useNavigate } from "react-router-dom";
 export default function AddHotel() {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [hotel, setHotel] = useState("");
     const [location, setLocation] = useState("");
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState([])
-    const [errMessage,seterrMessage]=useState('')
+    const [errMessage, seterrMessage] = useState('')
 
     const addHotel = async (e) => {
         e.preventDefault();
-        if(hotel.trim().length>0 && location.trim().length>0 &&  description.trim().length>0 && category.length>0){
+        if (hotel.trim().length > 0 && location.trim().length > 0 && description.trim().length > 0 && category.length > 0) {
             let images = []
-            if(image.length>0){
-            dispatch(showLoading());
+            if (image.length > 0) {
+                dispatch(showLoading());
 
-            for (let i = 0; i < image.length; i++) {
-                const url = await uploadImage(image[i])
-                images.push(url)
+                for (let i = 0; i < image.length; i++) {
+                    const url = await uploadImage(image[i])
+                    images.push(url)
+                }
+            } else {
+                return seterrMessage("Please upload an image")
             }
-        }else{
-            return seterrMessage("Please upload an image")
-        }
-        if (images.length) {
-            const addHotel = {
-                hotel,
-                location,
-                description,
-                category,
-                images,
-            };
-            try {
-                console.log(addHotel);
+            if (images.length) {
+                const addHotel = {
+                    hotel,
+                    location,
+                    description,
+                    category,
+                    images,
+                };
+                try {
+                    console.log(addHotel);
                     dispatch(showLoading());
                     const result = await addingHotel(addHotel)
                     toast.success(result.message);
@@ -53,7 +53,7 @@ export default function AddHotel() {
                     console.log(error);
                 }
             }
-        }else{
+        } else {
             seterrMessage("Please fill the form")
             dispatch(hideLoading());
         }

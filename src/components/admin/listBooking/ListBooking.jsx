@@ -1,8 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export default function ListBooking({ Item, index }) {
-    const navigate = useNavigate()
 
     return (
         <>
